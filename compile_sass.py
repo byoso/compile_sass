@@ -1,6 +1,15 @@
 #! /usr/bin/env python3.9
 # coding: utf-8
 
+
+"""
+Compiles sass into css on demand or on watch.
+
+Please see the readme.md file at https://github.com/byoso/compile_sass
+to see how it works."""
+
+
+
 import sys
 import os
 import time
@@ -39,8 +48,9 @@ def compile_all(directory=None):
 
 
 def watch(directory=None, timer=1):
+    """Compiles on watch, only if a change is made in sass.
+    (exit with ctrl+c)"""
     print(f"watching : {directory}")
-    # compile_all(directory)
     eye_on = {}
     for file in os.listdir(directory):
         if os.path.isfile(
@@ -62,6 +72,7 @@ def watch(directory=None, timer=1):
 
 
 def handler(args):
+    """Handles the arguments given in terminal"""
     if len(args) == 1 or args[1] in ["-a", "--all"]:
         compile_all(os.getcwd())
     if len(args) > 1:
